@@ -59,7 +59,7 @@ export default {
       padding: 50px 25px;
       li{
         // background: #e98d3f;
-        border: 1px solid #ccc;
+        border: 1px solid orange;
         padding: 5px 10px;
         margin-bottom: 15px;
         p{
@@ -78,7 +78,7 @@ export default {
     button{
       height: 60px;
       width: 60px;
-      border-radius: 50px; 
+      border-radius: 50px;
       border: none;
     }
   }
