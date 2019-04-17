@@ -1,14 +1,15 @@
 <template>
   <div id="textExtraction">
     <section id="upImg">
-      <div>
-        <p>请上传图片...</p>
+      <div class="img">
+        <img :src="img" alt="" v-if="isShow">
+        <p v-else>请上传图片...</p>
       </div>
-      <button>提取文字</button>
+      <button @click="previewImg">上传图片</button>
     </section>
     <section id="result"><h3>提取结果：</h3>
-      <div>
-        <p>这是结果</p>
+      <div class="words">
+        <p v-for="(item,index) in extractionText" :key="index">{{item.words}}</p>
       </div>
     </section>
   </div>
@@ -20,11 +21,64 @@ import { formatTime } from "@/utils/index";
 export default {
   data() {
     return {
-      logs: []
+      img:'',
+      isShow:false,
+      extractionText:'',
     };
   },
 
-  created() {}
+  created() {},
+  methods: {
+      //点击选择图片
+  previewImg() {
+    let token = wx.getStorageSync('TOKEN')
+    if(token){
+      wx.chooseImage({
+        count: 1,
+        sizeType: ['compressed'],
+        sourceType: ['camera'],
+        success: res => {
+          // tempFilePath可以作为img标签的src属性显示图片
+          const tempFilePaths = res.tempFilePaths
+
+          this.img = tempFilePaths[0]
+          this.isShow = true
+
+          this.upImg(tempFilePaths[0])
+         
+        }
+      })
+    }else{
+      //登陆
+      wx.navigateTo({
+        url: '../login/login',
+      })
+    }
+  },
+  upImg(imgFile) {
+    let token = wx.getStorageSync('TOKEN')
+    const uploadTask = wx.uploadFile({
+      url: 'http://localhost:2333/weChatApp/upImgFile',
+      filePath: imgFile,
+      name: 'imgfile',
+      header: {
+        "x-access-token": token
+      },
+      success: res => {
+        let $res = JSON.parse(res.data)
+        if($res.code ==200){
+         this.extractionText = $res.data
+        }
+        if($res.code ==-200){
+          wx.showToast({
+            title: '没有识别出文字哦！',
+            icon: 'none',
+          })
+        }
+      }
+    })
+  },
+  },
 };
 </script>
 
@@ -37,12 +91,16 @@ export default {
     flex-direction: column;
     #upImg{
       width: 80%;
-      div{
+      div.img{
         height: 180px;
         border:1px solid #ccc;
         display: flex;
         justify-content: center;
         align-items: center;
+        img{
+          width: 100%;
+          height: 100%;
+        }
       }
       button{
         font-size:16px;
@@ -53,7 +111,8 @@ export default {
     #result{
       width: 80%;
       margin-top: 25px;
-      div{
+      .words{
+        color: #999;
         padding-top: 5px;
         padding-left: 15px;
       }
