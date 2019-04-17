@@ -2,9 +2,9 @@
   <div>
     <section id="note">
       <ul>
-        <li v-for="(item,i) in [1,2,3]" :key="i">
-          <p>2019/04/15</p>
-          <p>TIP:欢迎使用语音便签</p>
+        <li v-for="(item,i) in notes" :key="i">
+          <p>{{item.createdTime}}</p>
+          <p>TIP:{{item.content}}</p>
         </li>
       </ul>
     </section>
@@ -18,15 +18,22 @@
 export default {
   data () {
     return {
-      
+      notes:""
     };
   },
 
   created() {
+    
+  },
+  onShow(){
     this.$http
       .get("http://api.xuewuzhijing.top:2333/weChatApp/noteList")
       .then(res => {
-        console.log(res);
+        let $res = res.data
+        if($res.code === 200){
+          this.notes = $res.data.result;
+          console.log(this.notes)
+        }
       });
   },
 

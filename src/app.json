@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/main",
     "pages/logs/main",
-    "pages/counter/main"
+    "pages/counter/main",
+    "pages/mine/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -26,6 +27,12 @@
       "pagePath": "pages/logs/main",
       "iconPath": "static/tabs/orders.png",
       "selectedIconPath": "static/tabs/orders-active.png"
+    },
+    {
+      "pagePath": "pages/mine/main",
+      "iconPath": "static/images/my3.png",
+      "selectedIconPath": "static/images/my.png",
+      "text": "我的"
     }],
 
     "items": [{
@@ -38,6 +45,12 @@
       "pagePath": "pages/logs/main",
       "icon": "static/tabs/orders.png",
       "activeIcon": "static/tabs/orders-active.png"
+    },
+    {
+      "pagePath": "pages/mine/main",
+      "icon": "static/images/my3.png",
+      "activeIcon": "static/images/my.png",
+      "name": "我的"
     }],
     "position": "bottom"
   }
