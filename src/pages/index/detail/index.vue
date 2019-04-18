@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div id="detail">
     <header>
       <p>{{time}}</p>
-      <button @click="save">保存</button>
+      <icon bindtap="editNote" type="success_no_circle" size="20" color="black" @click="save" />
     </header>
     <section id="edit">
       <textarea name id cols="30" rows="10" v-model="content"></textarea>
     </section>
     <footer>
-      <button @click="remove">删除</button>
+      <img src="/static/images/remove.png" alt="" @click="remove">
     </footer>
   </div>
 </template>
@@ -60,8 +60,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#detail{
+    padding: 0 20px;
+}
 header {
   display: flex;
+  justify-content: space-between;
   button {
     height: 30px;
     width: 30px;
@@ -71,5 +75,9 @@ footer {
   position: fixed;
   bottom: 0;
   right: 0;
+      img{
+          height: 50px;
+          width: 50px;
+      }
 }
 </style>
