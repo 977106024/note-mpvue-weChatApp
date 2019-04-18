@@ -2,7 +2,7 @@
   <div>
     <section id="note">
       <ul>
-        <li v-for="(item,i) in notes" :key="i">
+        <li v-for="(item,i) in notes" :key="i" @click="detail">
           <p>{{item.createdTime}}</p>
           <p>TIP:{{item.content}}</p>
         </li>
@@ -38,7 +38,8 @@ export default {
       });
   },
 
-  components: {},
+  components: {
+  },
 
   methods: {
     upRecorder(){
@@ -92,6 +93,14 @@ export default {
         })
       }
     })
+    },
+
+    //跳转详情页
+    detail(){
+      console.log(4444)
+      wx.navigateTo({
+        url:'./detail/main'
+      })
     }
   },
 

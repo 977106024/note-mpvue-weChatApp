@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/textExtraction/main",
     "pages/index/main",
-    "pages/counter/main",
+    "pages/index/detail/main",
+    "pages/textExtraction/main",
     "pages/mine/main"
   ],
   "window": {
