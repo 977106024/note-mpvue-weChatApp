@@ -2,7 +2,7 @@
   <div>
     <section id="note">
       <ul>
-        <li v-for="(item,i) in notes" :key="i" @click="detail">
+        <li v-for="(item,i) in notes" :key="item._id" @click="detail(item.createdTime,item.content,item._id)">
           <p>{{item.createdTime}}</p>
           <p>TIP:{{item.content}}</p>
         </li>
@@ -96,11 +96,11 @@ export default {
     },
 
     //跳转详情页
-    detail(){
+    detail(time,value,id){
       console.log(4444)
       wx.navigateTo({
-        url:'./detail/main'
-      })
+        url:`./detail/main?content=${value}&time=${time}&id=${id}`
+              })
     }
   },
 
