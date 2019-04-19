@@ -2,10 +2,11 @@
   <div id="detail">
     <header>
       <p>{{time}}</p>
-      <icon bindtap="editNote" type="success_no_circle" size="20" color="black" @click="save" />
+      <icon bindtap="editNote" type="success_no_circle" size="20" color="black" @click="save" v-if="isShow" />
+      <img src="/static/images/tag.png" alt="" v-else>
     </header>
     <section id="edit">
-      <textarea name id cols="30" rows="10" v-model="content"></textarea>
+      <textarea name id cols="30" rows="10" v-model="content" @focus="isShow = true"></textarea>
     </section>
     <footer>
       <img src="/static/images/remove.png" alt="" @click="remove">
@@ -18,16 +19,25 @@ export default {
   data: () => ({
     id: "",
     time: "",
-    content: ""
+    content: "",
+    firstContent:"",
+    isShow:false,
   }),
   mounted() {
     const query = this.$root.$mp.query;
     this.time = query.time;
     this.content = query.content;
+    this.firstContent = query.content
     this.id = query.id;
   },
   methods: {
     save() {
+      if(this.content == this.firstContent){
+        wx.navigateBack({
+          url:"../index/main"
+        })
+        return
+      }
       this.$http
         .post("http://localhost:2333/weChatApp/editNote", {
           content: this.content,
@@ -66,18 +76,18 @@ export default {
 header {
   display: flex;
   justify-content: space-between;
-  button {
+  img {
     height: 30px;
     width: 30px;
   }
 }
 footer {
   position: fixed;
-  bottom: 0;
-  right: 0;
+  bottom: 15px;
+  right: 15px;
       img{
-          height: 50px;
-          width: 50px;
+          height: 30px;
+          width: 30px;
       }
 }
 </style>
