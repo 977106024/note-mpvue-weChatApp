@@ -133,7 +133,10 @@ footer {
     height: 60px;
     width: 60px;
     border-radius: 50px;
-    border: none;
+    border: 1px solid #f0f0f0;
+    &:after{
+      border: none;
+    }
   }
 }
 </style>
