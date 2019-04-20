@@ -40,8 +40,18 @@ export default {
   },
 
   created() {},
+  onload(){
+    this.noteList()
+  },
   onShow() {
-    this.$http
+      this.noteList()
+  },
+
+  components: {},
+
+  methods: {
+    noteList(){
+      this.$http
       .get("http://api.xuewuzhijing.top:2333/weChatApp/noteList")
       .then(res => {
         let $res = res.data;
@@ -50,11 +60,8 @@ export default {
           console.log(this.notes);
         }
       });
-  },
-
-  components: {},
-
-  methods: {
+  
+    },
     upRecorder() {
       let token = wx.getStorageSync("TOKEN");
       if (!token) {
