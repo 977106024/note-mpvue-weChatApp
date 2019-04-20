@@ -9,7 +9,8 @@ let fly = new Fly; //实例化
 Vue.prototype.$http = fly //将fly实例挂在vue原型上
 
 let token = wx.getStorageSync('TOKEN')
-//添加请求拦截器
+if(token){
+  //添加请求拦截器
 fly.interceptors.request.use((request) => {
   //给所有请求添加自定义header
   request.headers["x-access-token"] = token;
@@ -23,6 +24,12 @@ fly.interceptors.request.use((request) => {
   //可以显式返回request, 也可以不返回，没有返回值时拦截器中默认返回request
   return request;
 })
+}else{
+  wx.navigateTo({
+    url:'pages/login/main'
+  })
+}
+
 
 
 
