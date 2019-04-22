@@ -3,23 +3,15 @@ mpvue框架note小程序
 
 原生项目地址：https://github.com/977106024/note-wechat-app
 
-> A Mpvue project
 
 ## Build Setup
 
 ``` bash
-# 初始化项目
-vue init mpvue/mpvue-quickstart myproject
-cd myproject
+#安装
+cnpm i
 
-# 安装依赖
-yarn
-
-# 开发时构建
-npm dev
-
-# 打包构建
-npm build
+# 运行
+npm run dev
 
 # 指定平台的开发时构建(微信、百度、头条、支付宝)
 npm dev:wx
@@ -36,5 +28,3 @@ npm build:my
 # 生成 bundle 分析报告
 npm run build --report
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
