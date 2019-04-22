@@ -1,4 +1,7 @@
-# my-project
+## note-wechat-app
+mpvue框架note小程序
+
+原生项目地址：https://github.com/977106024/note-wechat-app
 
 > A Mpvue project
 
